@@ -1,8 +1,16 @@
-public class QueensBoard{
+public class QueenBoard{
 
   private int[][]board;
 
-  public QueenBoard(int size){}
+  public QueenBoard(int size){
+    board = new int[size][size];
+
+    for (int x = 0; x < board.length; x++){
+      for (int y = 0; y < board[x].length; y++){
+        board[x][y] = 0;
+      }
+    }
+  }
 
   private boolean addQueen(int r, int c)
   private boolean removeQueen(int r, int c)
@@ -21,7 +29,14 @@ public class QueensBoard{
    *(pythonic string notation for clarity,
    *excludes the character up to the *)
    */
-   public String toString(){}
+   public String toString(){
+     String output = "";
+     for (int x = 0; x < board.length; x++){
+       for (int y = 0; y < board[x].length; y++){
+         
+       }
+     }
+   }
 
 
 
