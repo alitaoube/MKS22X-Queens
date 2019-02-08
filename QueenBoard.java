@@ -44,6 +44,26 @@ public class QueenBoard{
         board[i][c]++;
       }
     }
+
+    // 0-r 0-c
+
+
+
+    int y = Math.abs(r+1 - board.length);
+    int z = Math.abs(0-r);
+
+    y = Math.abs(y)
+    System.out.println(y + " " + z);
+
+    for (; y < board.length && z < board[y].length; y++, z++){
+      if (board[y][z] == -1 && y != r && z != c){
+        return false;
+      }
+      if (y != r && z != c){
+        board[y][z]++;
+      }
+    }
+
     return true;
   }
 
