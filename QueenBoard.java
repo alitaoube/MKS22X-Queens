@@ -1,4 +1,6 @@
 public class QueenBoard{
+  
+
 
   private int[][]board;
 
@@ -11,9 +13,9 @@ public class QueenBoard{
       }
     }
   }
-
-  private boolean addQueen(int r, int c)
-  private boolean removeQueen(int r, int c)
+  //
+  // private boolean addQueen(int r, int c)
+  // private boolean removeQueen(int r, int c)
 
   /**
    *@return The output string formatted as follows:
@@ -33,27 +35,33 @@ public class QueenBoard{
      String output = "";
      for (int x = 0; x < board.length; x++){
        for (int y = 0; y < board[x].length; y++){
-         
+         if (board[x][y] == -1){
+           output += "Q";
+         }
+         else{
+           output += '_';
+         }
        }
      }
+     return output;
    }
 
 
 
    /**
-   *@return false when the board is not solveable and leaves the board filled with zeros;
-
-   *        true when the board is solveable, and leaves the board in a solved state
-
-   *@throws IllegalStateException when the board starts with any non-zero value
-
-   */
-   public boolean solve(){}
-
-   /**
-   *@return the number of solutions found, and leaves the board filled with only 0's
-   *@throws IllegalStateException when the board starts with any non-zero value
-   */
-   public int countSolutions(){}
+   // *@return false when the board is not solveable and leaves the board filled with zeros;
+   //
+   // *        true when the board is solveable, and leaves the board in a solved state
+   //
+   // *@throws IllegalStateException when the board starts with any non-zero value
+   //
+   // */
+   // public boolean solve(){}
+   //
+   // /**
+   // *@return the number of solutions found, and leaves the board filled with only 0's
+   // *@throws IllegalStateException when the board starts with any non-zero value
+   // */
+   // public int countSolutions(){}
 
 }
