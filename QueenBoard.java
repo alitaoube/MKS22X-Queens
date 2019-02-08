@@ -2,6 +2,8 @@ public class QueenBoard{
   public static void main(String[] args) {
     QueenBoard q = new QueenBoard(8);
     System.out.println(q.toString());
+    q.addQueen(2,2);
+    System.out.println(q.toString());
   }
 
 
@@ -17,8 +19,33 @@ public class QueenBoard{
     }
   }
   //
-  // private boolean addQueen(int r, int c)
-  // private boolean removeQueen(int r, int c)
+  private boolean addQueen(int r, int c){
+    if (board[r][c] == 1){
+      return false;
+    }
+
+    board[r][c] = -1;
+
+
+    for (int x = 0; x < board.length; x++){
+      if (board[r][x] != 0){
+        return false;
+      }
+      board[r][x]++;
+    }
+
+    for (int i = 0; i < board[c].length; i++){
+      if (board[i][c] == -1){
+        return false;
+      }
+      board[i][c]++;
+    }
+    return true;
+  }
+
+  // private boolean removeQueen(int r, int c){
+  //   board[r][c] = 0;
+  // }
 
   /**
    *@return The output string formatted as follows:
@@ -39,11 +66,14 @@ public class QueenBoard{
      for (int x = 0; x < board.length; x++){
        for (int y = 0; y < board[x].length; y++){
          if (board[x][y] == -1){
-           output += "Q";
+           output += " Q ";
          }
          else{
-           output += " _ ";
+           output += " " + board[x][y] + " ";
          }
+         // else{
+         //   output += " _ ";
+         // }
        }
        output += '\n';
      }
