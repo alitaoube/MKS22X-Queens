@@ -1,5 +1,8 @@
 public class QueenBoard{
-  
+  public static void main(String[] args) {
+    QueenBoard q = new QueenBoard(8);
+    System.out.println(q.toString());
+  }
 
 
   private int[][]board;
@@ -39,9 +42,10 @@ public class QueenBoard{
            output += "Q";
          }
          else{
-           output += '_';
+           output += " _ ";
          }
        }
+       output += '\n';
      }
      return output;
    }
