@@ -28,17 +28,21 @@ public class QueenBoard{
 
 
     for (int x = 0; x < board.length; x++){
-      if (board[r][x] != 0){
+      if (board[r][x] != 0 && x != c){
         return false;
       }
-      board[r][x]++;
+      if (x != c){
+        board[r][x]++;
+      }
     }
 
     for (int i = 0; i < board[c].length; i++){
-      if (board[i][c] == -1){
+      if (board[i][c] == -1 && i != r){
         return false;
       }
-      board[i][c]++;
+      if (i != r){
+        board[i][c]++;
+      }
     }
     return true;
   }
