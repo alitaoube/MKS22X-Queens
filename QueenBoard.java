@@ -45,23 +45,17 @@ public class QueenBoard{
       }
     }
 
-    // 0-r 0-c
 
+    for (int x = c, y = r; x < board[x].length && y < board.length; x++, y++){
+      System.out.println(board[y][x]);
+      board[y][x]++;
+      System.out.println(board[y][x]);
+    }
 
-
-    int y = Math.abs(r+1 - board.length);
-    int z = Math.abs(0-r);
-
-    y = Math.abs(y)
-    System.out.println(y + " " + z);
-
-    for (; y < board.length && z < board[y].length; y++, z++){
-      if (board[y][z] == -1 && y != r && z != c){
-        return false;
-      }
-      if (y != r && z != c){
-        board[y][z]++;
-      }
+    for (int x = c, y = r; x > 0 && y > 0; x--, y--){
+      System.out.println(board[y][x]);
+      board[y][x]++;
+      System.out.println(board[y][x]);
     }
 
     return true;
