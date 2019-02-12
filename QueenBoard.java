@@ -1,4 +1,5 @@
 public class QueenBoard{
+
   private int[][]board;
 
   public QueenBoard(int size){
@@ -103,7 +104,6 @@ public class QueenBoard{
       }
 
       for (int c = 0; c < board.length; c++){
-        System.out.println(row + ", " + c);
         if (addQueen(row, c)){
           if (solver(row+1)) return true;
           removeQueen(row, c);
