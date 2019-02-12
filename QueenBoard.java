@@ -2,13 +2,14 @@ public class QueenBoard{
   public static void main(String[] args) {
     QueenBoard q = new QueenBoard(8);
     // q.addQueen(1,1);
-    System.out.println(q.addQueen(5,7));
-    System.out.println(q.toString());
+    // System.out.println(q.addQueen(5,7));
+    // System.out.println(q.toString());
+    //
+    // System.out.println(q.removeQueen(5,7));
+    // System.out.println(q.toString());
 
-    System.out.println(q.removeQueen(5,7));
+    System.out.println(q.solve());
     System.out.println(q.toString());
-
-    System.out.println(q.solve()) ;
   }
 
 
@@ -23,45 +24,21 @@ public class QueenBoard{
       }
     }
   }
-  //
+
   private boolean addQueen(int r, int c){
-    if (board[r][c] != 0){
-      return false;
-    }
+    if (board[r][c] != 0) return false;
 
     board[r][c] = -1;
 
-    // Horizontal markers
-    for (int x = r; x < board.length; x++){
-      if (board[r][x] != 0 && x != c){
-        return false;
-      }
-      if (x != c){
-        board[r][x]++;
-      }
-    }
-
-    // Vertical Markers
-    for (int i = c; i < board[c].length; i++){
-      if (board[i][c] == -1 && i != r){
-        return false;
-      }
-      if (i != r){
-        board[i][c]++;
-      }
-    }
-
-    // Diagonal Markers
-      for (int r1 = r; r1 < board.length; r1++){
-        for (int c1 = 0; c1 < board[r1].length; c1++){
-
-          if (r1 == r || Math.abs(r - r1) == c - c1 || Math.abs(r - r1) == Math.abs(c - c1) || c1 == c){
-            if (board[r1][c1] == 0) board[r1][c1]++;
-          }
+    for (int x = r; r < board.length; x++){
+      for (int y = 0; y < board[x].length; y++){
+        if (x == r || y == c || Math.abs(r - x) == c - y || Math.abs(r - y) == Math.abs(c - y)){
+          board[x][y]++;
         }
       }
-      return true;
-}
+    }
+    return true;
+  }
 
 
   private boolean removeQueen(int r, int c){
@@ -99,16 +76,17 @@ public class QueenBoard{
      for (int x = 0; x < board.length; x++){
        for (int y = 0; y < board[x].length; y++){
          if (board[x][y] == -1){
-           output += " Q ";
+           output += " Q";
          }
          else{
-           output += " " + board[x][y] + " ";
+           output += "_";
          }
          // else{
          //   output += " _ ";
          // }
        }
        output += '\n';
+
      }
      return output;
    }
@@ -123,47 +101,25 @@ public class QueenBoard{
    // *@throws IllegalStateException when the board starts with any non-zero value
    //
    // */
+
+
    public boolean solve(){
-     return solver(0, false);
+     if (board[0][0] != 0) throw new IllegalStateException();
+     return solver(0);
    }
 
-   public boolean solver(int row, boolean parsed){
-     if (row == board.length) return true;
-     if (parsed == false){
-       try{
-         for (int x = 0; x < board.length; x++){
-           for (int y = 0; y < board[x].length; y++){
-             if (board[x][y] != 0){
-               throw new IllegalStateException(); // Per website instructions
-             }
-           }
-         }
-         parsed = true;
-       }
-       catch (IllegalStateException e){
-         e.printStackTrace();
-         return false;
-       }
-     }
+   public boolean solver(int col){
+      if (col >= board.length) return true;
 
-
-     for (int x = 0; x < board.length; x++){ // Parse through the board
-       if (addQueen(row, x)){
-         if (solver(row+1, parsed)){
-           return true;
-         }
-         removeQueen(row, x);
-       }
+      for (int r = 0; r < board.length; r++){
+        if (addQueen(r, col)){
+          if (solver(col+1)) return true;
+            removeQueen(r, col);
+        }
       }
+     return true;
+   }
 
-     //   if (addQueen(row, x) && solver(row+1, parsed)) return true;  // Check if adding a queen solves the board
-     //   removeQueen(row, x); // If not, remove it.
-     // }
-     System.out.println("HERE");
-     return false;
-
- }
-   //
    // /**
    // *@return the number of solutions found, and leaves the board filled with only 0's
    // *@throws IllegalStateException when the board starts with any non-zero value
