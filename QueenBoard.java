@@ -26,7 +26,7 @@ public class QueenBoard{
 
     board[r][c] = -1;
 
-
+    // Horizontal markers
     for (int x = 0; x < board.length; x++){
       if (board[r][x] != 0 && x != c){
         return false;
@@ -36,6 +36,7 @@ public class QueenBoard{
       }
     }
 
+    // Vertical Markers
     for (int i = 0; i < board[c].length; i++){
       if (board[i][c] == -1 && i != r){
         return false;
@@ -45,21 +46,18 @@ public class QueenBoard{
       }
     }
 
+    // Diagonal Markers
+      for (int r1 = r; r1 < board.length; r1++){
+        for (int c1 = 0; c1 < board[r1].length; c1++){
 
-    for (int x = c, y = r; x < board[x].length && y < board.length; x++, y++){
-      System.out.println(board[y][x]);
-      board[y][x]++;
-      System.out.println(board[y][x]);
-    }
+          if (r1 == r || Math.abs(r - r1) == c - c1 || Math.abs(r - r1) == Math.abs(c - c1) || c1 == c){
+            if (board[r1][c1] != -1) board[r1][c1]++;
+          }
+        }
+      }
+      return true;
+}
 
-    for (int x = c, y = r; x > 0 && y > 0; x--, y--){
-      System.out.println(board[y][x]);
-      board[y][x]++;
-      System.out.println(board[y][x]);
-    }
-
-    return true;
-  }
 
   // private boolean removeQueen(int r, int c){
   //   board[r][c] = 0;
