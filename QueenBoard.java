@@ -1,22 +1,4 @@
 public class QueenBoard{
-  public static void main(String[] args) {
-    QueenBoard q = new QueenBoard(8);
-    // q.addQueen(1,1);
-    // System.out.println(q.addQueen(5,7));
-    // System.out.println(q.toString());
-    // q.removeQueen(5,7);
-    // System.out.println(q.toString());
-    //
-    // System.out.println(q.removeQueen(5,7));
-    // System.out.println(q.toString());
-
-    // System.out.println(q.solve());
-    // System.out.println(q.toString());
-
-    System.out.println(q.countSolutions());
-  }
-
-
   private int[][]board;
 
   public QueenBoard(int size){
@@ -35,6 +17,8 @@ public class QueenBoard{
       board[r][c] = -1;
       for (int x = r; x < board.length; x++){
         for (int y = 0; y < board[x].length; y++){
+          // An amalgamation of all possible markers, rather than doing it one by one.
+          // Only need to add below, no need for above it.
           if (x == r || y == c || Math.abs(r - x) == c - y || Math.abs(r - x) == Math.abs(c - y)){
             if (board[x][y] == 0) board[x][y] = r+1;
             }
@@ -83,9 +67,6 @@ public class QueenBoard{
          if (board[x][y] == -1){
            output += " Q";
          }
-         // else{
-         //   output += " " + board[x][y] ;
-         // }
          else{
            output += " _";
          }
@@ -109,6 +90,8 @@ public class QueenBoard{
 
 
    public boolean solve(){
+     // Checks to make sure board doesn't start with non zero number, if it does
+     // throws error.
      if (board[0][0] != 0) throw new IllegalStateException();
      return solver(0);
    }
@@ -134,6 +117,7 @@ public class QueenBoard{
    // *@throws IllegalStateException when the board starts with any non-zero value
    // */
    public int countSolutions(){
+     if (board[0][0] != 0) throw new IllegalStateException();
      return countSolve(0);
    }
 
