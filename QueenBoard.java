@@ -1,15 +1,17 @@
 public class QueenBoard{
   public static void main(String[] args) {
     QueenBoard q = new QueenBoard(8);
-    q.addQueen(1,1);
-    System.out.println(q.addQueen(5,7));
-    System.out.println(q.toString());
+    // q.addQueen(1,1);
+    // System.out.println(q.addQueen(5,7));
+    // System.out.println(q.toString());
+    // q.removeQueen(5,7);
+    // System.out.println(q.toString());
     //
     // System.out.println(q.removeQueen(5,7));
     // System.out.println(q.toString());
 
-    // System.out.println(q.solve());
-    // System.out.println(q.toString());
+    System.out.println(q.solve());
+    System.out.println(q.toString());
   }
 
 
@@ -32,7 +34,7 @@ public class QueenBoard{
       for (int x = r; x < board.length; x++){
         for (int y = 0; y < board[x].length; y++){
           if (x == r || y == c || Math.abs(r - x) == c - y || Math.abs(r - x) == Math.abs(c - y)){
-            if (board[x][y] == 0) board[x][y]++;
+            if (board[x][y] == 0) board[x][y] = r+1;
             }
           }
         }
@@ -50,7 +52,7 @@ public class QueenBoard{
     // Essentially parse through the same way, just remove stuff this time.
     for (int r1 = r; r1 < board.length; r1++){
       for (int c1 = 0; c1 < board[r1].length; c1++){
-        if (board[r1][c1] > 0){
+        if (board[r1][c1] == r+1){
           board[r1][c1] = 0;
         }
       }
@@ -79,12 +81,12 @@ public class QueenBoard{
          if (board[x][y] == -1){
            output += " Q";
          }
-         else{
-           output += " " + board[x][y] ;
-         }
          // else{
-         //   output += " _ ";
+         //   output += " " + board[x][y] ;
          // }
+         else{
+           output += " _";
+         }
        }
        output += '\n';
 
@@ -125,7 +127,7 @@ public class QueenBoard{
       }
       toString();
       System.out.println("HERE");
-     return true;
+     return false;
    }
 
    // /**
