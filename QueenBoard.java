@@ -10,8 +10,10 @@ public class QueenBoard{
     // System.out.println(q.removeQueen(5,7));
     // System.out.println(q.toString());
 
-    System.out.println(q.solve());
-    System.out.println(q.toString());
+    // System.out.println(q.solve());
+    // System.out.println(q.toString());
+
+    System.out.println(q.countSolutions());
   }
 
 
@@ -114,7 +116,6 @@ public class QueenBoard{
    public boolean solver(int row){
 
       if (row >= board.length) {
-        System.out.println("HERE");
         return true;
       }
 
@@ -125,8 +126,6 @@ public class QueenBoard{
           removeQueen(row, c);
         }
       }
-      toString();
-      System.out.println("HERE");
      return false;
    }
 
@@ -134,6 +133,20 @@ public class QueenBoard{
    // *@return the number of solutions found, and leaves the board filled with only 0's
    // *@throws IllegalStateException when the board starts with any non-zero value
    // */
-   // public int countSolutions(){}
+   public int countSolutions(){
+     return countSolve(0);
+   }
+
+   public int countSolve(int r){
+     if (r >= board.length) return 1;
+     int count = 0;
+     for (int x = 0; x < board.length; x++){
+       if (addQueen(r, x)){
+         count+= countSolve(r+1);
+         removeQueen(r, x);
+       }
+     }
+     return count;
+   }
 
 }
