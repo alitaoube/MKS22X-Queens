@@ -1,15 +1,15 @@
 public class QueenBoard{
   public static void main(String[] args) {
     QueenBoard q = new QueenBoard(8);
-    // q.addQueen(1,1);
-    // System.out.println(q.addQueen(5,7));
-    // System.out.println(q.toString());
+    q.addQueen(1,1);
+    System.out.println(q.addQueen(5,7));
+    System.out.println(q.toString());
     //
     // System.out.println(q.removeQueen(5,7));
     // System.out.println(q.toString());
 
-    System.out.println(q.solve());
-    System.out.println(q.toString());
+    // System.out.println(q.solve());
+    // System.out.println(q.toString());
   }
 
 
@@ -26,18 +26,19 @@ public class QueenBoard{
   }
 
   private boolean addQueen(int r, int c){
-    if (board[r][c] != 0) return false;
 
-    board[r][c] = -1;
-
-    for (int x = r; r < board.length; x++){
-      for (int y = 0; y < board[x].length; y++){
-        if (x == r || y == c || Math.abs(r - x) == c - y || Math.abs(r - y) == Math.abs(c - y)){
-          board[x][y]++;
+    if (board[r][c] == 0){
+      board[r][c] = -1;
+      for (int x = r; x < board.length; x++){
+        for (int y = 0; y < board[x].length; y++){
+          if (x == r || y == c || Math.abs(r - x) == c - y || Math.abs(r - x) == Math.abs(c - y)){
+            if (board[x][y] == 0) board[x][y]++;
+            }
+          }
         }
+        return true;
       }
-    }
-    return true;
+    return false;
   }
 
 
@@ -79,7 +80,7 @@ public class QueenBoard{
            output += " Q";
          }
          else{
-           output += "_";
+           output += " " + board[x][y] ;
          }
          // else{
          //   output += " _ ";
@@ -108,15 +109,22 @@ public class QueenBoard{
      return solver(0);
    }
 
-   public boolean solver(int col){
-      if (col >= board.length) return true;
+   public boolean solver(int row){
 
-      for (int r = 0; r < board.length; r++){
-        if (addQueen(r, col)){
-          if (solver(col+1)) return true;
-            removeQueen(r, col);
+      if (row >= board.length) {
+        System.out.println("HERE");
+        return true;
+      }
+
+      for (int c = 0; c < board.length; c++){
+        System.out.println(row + ", " + c);
+        if (addQueen(row, c)){
+          if (solver(row+1)) return true;
+          removeQueen(row, c);
         }
       }
+      toString();
+      System.out.println("HERE");
      return true;
    }
 
