@@ -1,14 +1,14 @@
 public class QueenBoard{
   public static void main(String[] args) {
     QueenBoard q = new QueenBoard(8);
-    q.addQueen(1,1);
-    System.out.println(q.addQueen(2,2));
+    // q.addQueen(1,1);
+    System.out.println(q.addQueen(5,7));
     System.out.println(q.toString());
 
-    System.out.println(q.removeQueen(1,1));
+    System.out.println(q.removeQueen(5,7));
     System.out.println(q.toString());
 
-    // System.out.println(q.solve()) ;
+    System.out.println(q.solve()) ;
   }
 
 
@@ -128,8 +128,7 @@ public class QueenBoard{
    }
 
    public boolean solver(int row, boolean parsed){
-     if (board.length > 0 && row == board.length) return true;
-
+     if (row == board.length) return true;
      if (parsed == false){
        try{
          for (int x = 0; x < board.length; x++){
