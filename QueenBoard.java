@@ -32,7 +32,7 @@ public class QueenBoard{
     board[r][c] = -1;
 
     // Horizontal markers
-    for (int x = 0; x < board.length; x++){
+    for (int x = r; x < board.length; x++){
       if (board[r][x] != 0 && x != c){
         return false;
       }
@@ -42,7 +42,7 @@ public class QueenBoard{
     }
 
     // Vertical Markers
-    for (int i = 0; i < board[c].length; i++){
+    for (int i = c; i < board[c].length; i++){
       if (board[i][c] == -1 && i != r){
         return false;
       }
@@ -72,8 +72,8 @@ public class QueenBoard{
     // Essentially parse through the same way, just remove stuff this time.
     for (int r1 = r; r1 < board.length; r1++){
       for (int c1 = 0; c1 < board[r1].length; c1++){
-        if (board[r1][c1] == r+1){
-          board[r1][c1]--;
+        if (board[r1][c1] > 0){
+          board[r1][c1] = 0;
         }
       }
     }
