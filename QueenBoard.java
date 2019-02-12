@@ -1,7 +1,14 @@
 public class QueenBoard{
   public static void main(String[] args) {
     QueenBoard q = new QueenBoard(8);
-    System.out.println(q.solve()) ;
+    q.addQueen(1,1);
+    System.out.println(q.addQueen(2,2));
+    System.out.println(q.toString());
+
+    System.out.println(q.removeQueen(1,1));
+    System.out.println(q.toString());
+
+    // System.out.println(q.solve()) ;
   }
 
 
@@ -123,28 +130,40 @@ public class QueenBoard{
    public boolean solver(int row, boolean parsed){
      if (board.length > 0 && row == board.length) return true;
 
-     try{
-       for (int x = 0; x < board.length; x++){
-         for (int y = 0; y < board[x].length; y++){
-           if (board[x][y] != 0){
-             throw new IllegalStateException(); // Per website instructions
+     if (parsed == false){
+       try{
+         for (int x = 0; x < board.length; x++){
+           for (int y = 0; y < board[x].length; y++){
+             if (board[x][y] != 0){
+               throw new IllegalStateException(); // Per website instructions
+             }
            }
          }
+         parsed = true;
        }
-       parsed = true;
-     }
-     catch (IllegalStateException e){
-       e.printStackTrace();
-       return false;
+       catch (IllegalStateException e){
+         e.printStackTrace();
+         return false;
+       }
      }
 
+
      for (int x = 0; x < board.length; x++){ // Parse through the board
-       addQueen(row, x);
-       if (solver(row+1, parsed)) return true;  // Check if adding a queen solves the board
-       removeQueen(row, x); // If not, remove it.
-     }
+       if (addQueen(row, x)){
+         if (solver(row+1, parsed)){
+           return true;
+         }
+         removeQueen(row, x);
+       }
+      }
+
+     //   if (addQueen(row, x) && solver(row+1, parsed)) return true;  // Check if adding a queen solves the board
+     //   removeQueen(row, x); // If not, remove it.
+     // }
+     System.out.println("HERE");
      return false;
-   }
+
+ }
    //
    // /**
    // *@return the number of solutions found, and leaves the board filled with only 0's
